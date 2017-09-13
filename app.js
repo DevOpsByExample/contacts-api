@@ -5,6 +5,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var sequelize = require('./util/sequelize');
+
+sequelize.authenticate()
+	.then(function() {
+		console.log('Connection to DB established successfully');
+	})
+	.catch(function(error) {
+		console.error('Failed to establish connection with DB', error);
+	});
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 
