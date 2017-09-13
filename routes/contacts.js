@@ -8,8 +8,8 @@ router.get('/', function(req, res, next) {
 		.then(function(contacts) {
 			res.json(contacts);
 		})
-		.catch(function(error) {
-			next(error, req, res);
+		.catch(function(err) {
+			next(err, req, res);
 		});
 });
 
@@ -18,8 +18,8 @@ router.get('/:id', function(req, res, next) {
 		.then(function(contact) {
 			res.json(contact);
 		})
-		.catch(function(error) {
-			next(error, req, res);
+		.catch(function(err) {
+			next(err, req, res);
 		});
 });
 
@@ -36,8 +36,8 @@ router.put('/', function(req, res, next) {
 		.then(function() {
 			res.status(201).json(data);
 		})
-		.catch(function(error) {
-			next(error, req, res);
+		.catch(function(err) {
+			next(err, req, res);
 		});
 });
 

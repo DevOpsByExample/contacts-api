@@ -11,7 +11,7 @@ sequelize.authenticate()
 	.then(function() {
 		console.log('Connection to DB established successfully');
 	})
-	.catch(function(error) {
+	.catch(function(err) {
 		console.error('Failed to establish connection with DB', error);
 	});
 

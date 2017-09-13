@@ -26,8 +26,8 @@ Contact.sync({force: false})
   .then(function() {
     console.log('Table created or it exists already');
   })
-  .catch(function(error) {
-    console.error('Failed to create table', error);
+  .catch(function(err) {
+    console.error('Failed to create table', err);
   });
 
 module.exports = Contact;
