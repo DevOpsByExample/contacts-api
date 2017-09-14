@@ -41,4 +41,33 @@ router.put('/', function(req, res, next) {
 		});
 });
 
+router.post('/:id', function(req, res, next) {
+	var data = {
+		employeeID: req.body.employeeID,
+		firstName: req.body.firstName,
+		lastName: req.body.lastName,
+		phoneNumber: req.body.phoneNumber,
+		email: req.body.email
+	};
+
+	Contact.findOne({where: {employeeID: req.params.id}})
+		.then(function(contact) {
+
+			var fieldsToUpdate = Object.keys(data).filter(function(field) {
+				return data[field] !== contact[field];
+			});
+
+			contact.update(data, {fields: fieldsToUpdate})
+				.then(function(updatedData) {
+					res.json(updatedData);
+				})
+				.catch(function(err) {
+					next(err, req, res);
+				});
+		})
+		.catch(function(err) {
+			next(err, req, res);
+		});
+});
+
 module.exports = router;
