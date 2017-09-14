@@ -4,7 +4,7 @@ var sequelize = require('../util/sequelize');
 var Contact = sequelize.define('contact', {
   employeeID: {
     type: Sequelize.STRING,
-    primaryKey: true
+    unique: true
   },
   firstName: {
     type: Sequelize.STRING
