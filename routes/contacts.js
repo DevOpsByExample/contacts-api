@@ -34,7 +34,7 @@ router.put('/', function(req, res, next) {
 
 	Contact.create(data)
 		.then(function() {
-			res.status(201).json(data);
+			res.json(data);
 		})
 		.catch(function(err) {
 			next(err, req, res);
@@ -64,6 +64,16 @@ router.post('/:id', function(req, res, next) {
 				.catch(function(err) {
 					next(err, req, res);
 				});
+		})
+		.catch(function(err) {
+			next(err, req, res);
+		});
+});
+
+router.delete('/:id', function(req, res, next) {
+	Contact.destroy({where: {employeeID: req.params.id}})
+		.then(function() {
+			res.json({message: 'Deleted successfully'});
 		})
 		.catch(function(err) {
 			next(err, req, res);
