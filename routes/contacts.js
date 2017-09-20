@@ -13,8 +13,8 @@ router.get('/', function(req, res, next) {
     });
 });
 
-router.get('/:employeeID', function(req, res, next) {
-  Contact.findOne({where: {employeeID: req.params.employeeID}})
+router.get('/:id', function(req, res, next) {
+  Contact.findOne({where: {id: req.params.id}})
     .then(function(contact) {
       res.json(contact);
     })
@@ -25,11 +25,11 @@ router.get('/:employeeID', function(req, res, next) {
 
 router.put('/', function(req, res, next) {
   var data = {
-    employeeID: req.body.employeeID,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     phoneNumber: req.body.phoneNumber,
-    email: req.body.email
+    email: req.body.email,
+    address: req.body.address
   };
 
   Contact.create(data)
@@ -41,16 +41,16 @@ router.put('/', function(req, res, next) {
     });
 });
 
-router.post('/:employeeID', function(req, res, next) {
+router.post('/:id', function(req, res, next) {
   var data = {
-    employeeID: req.body.employeeID,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     phoneNumber: req.body.phoneNumber,
+    address: req.body.address,
     email: req.body.email
   };
 
-  Contact.findOne({where: {employeeID: req.params.employeeID}})
+  Contact.findOne({where: {id: req.params.id}})
     .then(function(contact) {
 
       var fieldsToUpdate = Object.keys(data).filter(function(field) {
@@ -70,8 +70,8 @@ router.post('/:employeeID', function(req, res, next) {
     });
 });
 
-router.delete('/:employeeID', function(req, res, next) {
-  Contact.destroy({where: {employeeID: req.params.employeeID}})
+router.delete('/:id', function(req, res, next) {
+  Contact.destroy({where: {id: req.params.id}})
     .then(function() {
       res.json({message: 'Deleted successfully'});
     })

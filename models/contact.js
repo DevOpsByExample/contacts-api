@@ -2,10 +2,6 @@ var Sequelize = require('sequelize');
 var sequelize = require('../util/sequelize');
 
 var Contact = sequelize.define('contact', {
-  employeeID: {
-    type: Sequelize.STRING,
-    unique: true
-  },
   firstName: {
     type: Sequelize.STRING
   },
@@ -13,20 +9,21 @@ var Contact = sequelize.define('contact', {
     type: Sequelize.STRING
   },
   phoneNumber: {
-    type: Sequelize.STRING,
-    unique: true
+    type: Sequelize.STRING
   },
   email: {
-    type: Sequelize.STRING,
-    unique: true
+    type: Sequelize.STRING
+  },
+  address: {
+    type: Sequelize.TEXT
   }
 });
 
-Contact.sync({force: false})
-  .then(function() {
+Contact.sync({force: true})
+  .then(() => {
     console.log('Table created or it exists already');
   })
-  .catch(function(err) {
+  .catch((err) => {
     console.error('Failed to create table', err);
   });
 
