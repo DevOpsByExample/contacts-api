@@ -11,7 +11,7 @@ sequelize.authenticate()
 .then(() => {
   console.log('Connection to DB established successfully');
 }).catch(function(err) {
-  console.error('Failed to establish connection with DB', error);
+  console.error('Failed to establish connection with DB', err);
 });
 
 const index = require('./routes/index');
