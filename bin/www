@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 
+// Ensures NODE_ENV is not empty
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-const config = require(`../config/${process.env.NODE_ENV}.js`);
 
 /**
  * Module dependencies.
  */
 
+const config = require('../config/main');
 var app = require('../app');
 var debug = require('debug')('address-book-api:server');
 var http = require('http');
