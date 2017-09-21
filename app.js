@@ -4,8 +4,8 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const sequelize = require('./util/sequelize');
-const cors = require('cors')
 
 sequelize.authenticate()
 .then(() => {

@@ -39,7 +39,7 @@ var Contact = sequelize.define('contact', {
   }
 });
 
-Contact.sync({force: true})
+Contact.sync({force: false})
   .then(() => {
     console.log('Table created or it exists already');
   })
