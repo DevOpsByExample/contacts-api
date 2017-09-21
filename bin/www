@@ -1,21 +1,20 @@
 #!/usr/bin/env node
 
-// Ensures NODE_ENV is not empty
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
 /**
- * Module dependencies.
+ * Ensures NODE_ENV is not empty
  */
 
-const config = require('../config/main');
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 var app = require('../app');
 var debug = require('debug')('address-book-api:server');
 var http = require('http');
 
 /**
- * Get port from environment and store in Express.
+ * Get port from config and store in Express.
  */
 
+const config = require('../config/main');
 var port = normalizePort(config.appPort);
 app.set('port', port);
 
