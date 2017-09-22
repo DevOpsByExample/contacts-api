@@ -66,6 +66,20 @@ describe('GET /contacts/:id', () => {
 			done(err);
 		});
 	});
+
+	it('should return 404 if contact is not present', done => {
+		supertestAgent
+		.get('/contacts/10')
+		.expect('Content-Type', /json/)
+		.expect(404)
+		.then(response => {
+			expect(response.body.message).to.equal('Contact not found');
+			done();
+		})
+		.catch(err => {
+			done(err);
+		});
+	});
 });
 
 describe('PUT /contacts', () => {

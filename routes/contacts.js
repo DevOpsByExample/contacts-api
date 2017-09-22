@@ -16,6 +16,7 @@ router.get('/', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
   Contact.findOne({where: {id: req.params.id}})
     .then(function(contact) {
+      contact || res.status(404).json({message: 'Contact not found'});
       res.json(contact);
     })
     .catch(function(err) {
