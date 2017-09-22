@@ -1,5 +1,6 @@
 var Sequelize = require('sequelize');
 var sequelize = require('../util/sequelize');
+var logger = require('../util/logger');
 
 var Contact = sequelize.define('contact', {
   firstName: {
@@ -41,10 +42,10 @@ var Contact = sequelize.define('contact', {
 
 Contact.sync({force: false})
   .then(() => {
-    console.log('Table created or it exists already');
+    logger.log('Table created or it exists already');
   })
   .catch((err) => {
-    console.error('Failed to create table', err);
+    logger.error('Failed to create table', err);
   });
 
 module.exports = Contact;

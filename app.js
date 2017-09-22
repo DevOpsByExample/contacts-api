@@ -1,17 +1,19 @@
 const express = require('express');
+const fs = require('fs');
 const path = require('path');
 const favicon = require('serve-favicon');
-const logger = require('morgan');
+const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const sequelize = require('./util/sequelize');
+const logger = require('./util/logger');
 
 sequelize.authenticate()
 .then(() => {
-  console.log('Connection to DB established successfully');
+  logger.log('Connection to DB established successfully');
 }).catch(function(err) {
-  console.error('Failed to establish connection with DB', err);
+  logger.error('Failed to establish connection with DB', err);
 });
 
 const index = require('./routes/index');
@@ -26,7 +28,11 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+
+process.env.NODE_ENV === 'development' && app.use(morgan('dev'));
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'app.log'), {flags: 'a'})
+app.use(morgan('combined', {stream: accessLogStream}));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -46,7 +52,7 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  console.error(err);
+  logger.error(err);
 
   res.status(err.status || 500).json({message: err.message});
 });
