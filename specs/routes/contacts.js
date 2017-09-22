@@ -67,3 +67,47 @@ describe('GET /contacts/:id', () => {
 		});
 	});
 });
+
+describe('PUT /contacts', () => {
+	it('should create a contact', done => {
+		const contact = {
+			"firstName": "Viky", "lastName": "C", "phoneNumber": "9876767676", "email": "viky@gmail.com", "address": "Chennai"
+		};
+
+		supertestAgent
+		.put('/contacts')
+		.send(contact)
+		.expect('Content-Type', /json/)
+		.expect(200)
+		.then(response => {
+			const actualContact = response.body;
+
+			expect(actualContact).to.include(contact);
+			done();
+		})
+		.catch(err => {
+			done(err);
+		});
+	});
+
+	it('should respond with error when any field is empty', done => {
+		const contact = {
+			"firstName": "", "lastName": "C", "phoneNumber": "9876767676", "email": "viky@gmail.com", "address": "Chennai"
+		};
+
+		supertestAgent
+		.put('/contacts')
+		.send(contact)
+		.expect('Content-Type', /json/)
+		.expect(500)
+		.then(response => {
+			const error = response.body;
+
+			expect(error.message).to.equal('Validation error: Validation notEmpty on firstName failed');
+			done();
+		})
+		.catch(err => {
+			done(err);
+		});
+	});
+});
