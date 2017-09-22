@@ -71,8 +71,11 @@ router.post('/:id', function(req, res, next) {
 });
 
 router.delete('/:id', function(req, res, next) {
-  Contact.destroy({where: {id: req.params.id}})
-    .then(function() {
+  var id = req.params.id;
+
+  Contact.destroy({where: {id: id}})
+    .then(function(affectedRows) {
+      affectedRows === 0 && res.status(404).json({message: 'Contact not found'});
       res.json({message: 'Deleted successfully'});
     })
     .catch(function(err) {

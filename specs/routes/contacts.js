@@ -111,3 +111,35 @@ describe('PUT /contacts', () => {
 		});
 	});
 });
+
+describe('DELETE /contacts/:id', () => {
+	it('should delete contact by id', done => {
+		const id = contactIds[0];
+
+		supertestAgent
+		.delete(`/contacts/${id}`)
+		.expect('Content-Type', /json/)
+		.expect(200)
+		.then(response => {
+			expect(response.body.message).to.equal('Deleted successfully');
+			done();
+		})
+		.catch(err => {
+			done(err);
+		});
+	});
+
+	it('should return 404 if contact is not present', done => {
+		supertestAgent
+		.delete('/contacts/10')
+		.expect('Content-Type', /json/)
+		.expect(404)
+		.then(response => {
+			expect(response.body.message).to.equal('Contact not found');
+			done();
+		})
+		.catch(err => {
+			done(err);
+		});
+	});
+});
