@@ -53,6 +53,7 @@ router.post('/:id', function(req, res, next) {
 
   Contact.findOne({where: {id: req.params.id}})
     .then(function(contact) {
+      contact || res.status(404).json({message: 'Contact not found'});
 
       var fieldsToUpdate = Object.keys(data).filter(function(field) {
         return data[field] !== contact[field];
