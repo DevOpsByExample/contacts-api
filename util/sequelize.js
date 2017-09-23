@@ -13,5 +13,8 @@ var sequelize = new Sequelize(config.dbName, config.dbUsername, config.dbPasswor
     idle: 10000
   },
 });
-
+logger.log(config.dbName);
+logger.log(config.dbHostname);
+logger.log(config.dbUsername);
+logger.log(config.dbPassword);
 module.exports = sequelize;
