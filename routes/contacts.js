@@ -16,6 +16,7 @@ router.get('/', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
   Contact.findOne({where: {id: req.params.id}})
     .then(function(contact) {
+      contact || res.status(404).json({message: 'Contact not found'});
       res.json(contact);
     })
     .catch(function(err) {
@@ -52,6 +53,7 @@ router.post('/:id', function(req, res, next) {
 
   Contact.findOne({where: {id: req.params.id}})
     .then(function(contact) {
+      contact || res.status(404).json({message: 'Contact not found'});
 
       var fieldsToUpdate = Object.keys(data).filter(function(field) {
         return data[field] !== contact[field];
@@ -71,8 +73,11 @@ router.post('/:id', function(req, res, next) {
 });
 
 router.delete('/:id', function(req, res, next) {
-  Contact.destroy({where: {id: req.params.id}})
-    .then(function() {
+  var id = req.params.id;
+
+  Contact.destroy({where: {id: id}})
+    .then(function(affectedRows) {
+      affectedRows === 0 && res.status(404).json({message: 'Contact not found'});
       res.json({message: 'Deleted successfully'});
     })
     .catch(function(err) {

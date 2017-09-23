@@ -16,7 +16,7 @@ const logger = {
 	},
 	error: (error) => {
 		env === 'development' && console.error(error);
-		writeToFile(error);
+		writeToFile(error.stack);
 	}
 };
 

@@ -66,6 +66,20 @@ describe('GET /contacts/:id', () => {
 			done(err);
 		});
 	});
+
+	it('should return 404 if contact is not present', done => {
+		supertestAgent
+		.get('/contacts/10')
+		.expect('Content-Type', /json/)
+		.expect(404)
+		.then(response => {
+			expect(response.body.message).to.equal('Contact not found');
+			done();
+		})
+		.catch(err => {
+			done(err);
+		});
+	});
 });
 
 describe('PUT /contacts', () => {
@@ -104,6 +118,78 @@ describe('PUT /contacts', () => {
 			const error = response.body;
 
 			expect(error.message).to.equal('Validation error: Validation notEmpty on firstName failed');
+			done();
+		})
+		.catch(err => {
+			done(err);
+		});
+	});
+});
+
+describe('POST /contacts/:id', () => {
+	it('should update a contact by id', done => {
+		const id = contactIds[0];
+		const contact = {
+			"firstName": "Arunvel", "lastName": "S", "phoneNumber": "0000000000", "email": "arun@gmail.com", "address": "Taramani, Chennai"
+		};
+
+		supertestAgent
+		.post(`/contacts/${id}`)
+		.send(contact)
+		.expect('Content-Type', /json/)
+		.expect(200)
+		.then(response => {
+			var updatedContact = response.body;
+
+			expect(updatedContact.firstName).to.equal('Arunvel');
+			expect(updatedContact.phoneNumber).to.equal('0000000000');
+			done();
+		})
+		.catch(err => {
+			done(err);
+		});
+	});
+
+	it('should return 404 when contact is not present', done => {
+		supertestAgent
+		.post('/contacts/10')
+		.send({})
+		.expect('Content-Type', /json/)
+		.expect(404)
+		.then(response => {
+			expect(response.body.message).to.equal('Contact not found');
+			done();
+		})
+		.catch(err => {
+			done(err);
+		});
+	});
+});
+
+describe('DELETE /contacts/:id', () => {
+	it('should delete contact by id', done => {
+		const id = contactIds[0];
+
+		supertestAgent
+		.delete(`/contacts/${id}`)
+		.expect('Content-Type', /json/)
+		.expect(200)
+		.then(response => {
+			expect(response.body.message).to.equal('Deleted successfully');
+			done();
+		})
+		.catch(err => {
+			done(err);
+		});
+	});
+
+	it('should return 404 if contact is not present', done => {
+		supertestAgent
+		.delete('/contacts/10')
+		.expect('Content-Type', /json/)
+		.expect(404)
+		.then(response => {
+			expect(response.body.message).to.equal('Contact not found');
 			done();
 		})
 		.catch(err => {
