@@ -21,7 +21,9 @@ var Contact = sequelize.define('contact', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      notEmpty: true
+      notEmpty: true,
+      isNumeric: true,
+      len: [10, 10]
     }
   },
   email: {

@@ -32,7 +32,7 @@ describe('Contact model', () => {
   });
 
   describe('Email field', done => {
-    let contact = {firstName: 'Karthik', lastName: 'S', phoneNumber: '98987877888', email: 'karthiks@example.com', address: 'Chennai'};
+    let contact = {firstName: 'Karthik', lastName: 'S', phoneNumber: '9090909898', email: 'karthiks@example.com', address: 'Chennai'};
 
     after(done => {
       Contact.destroy({where: {firstName: contact.firstName}})
@@ -60,6 +60,67 @@ describe('Contact model', () => {
       Contact.create(contact)
       .then(createdContact => {
         expect(createdContact).to.include(createdContact);
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+    });
+  });
+
+  describe('Phone number field', done => {
+    let contact = {firstName: 'Karthik', lastName: 'S', phoneNumber: '9098987654', email: 'karthiks@example.com', address: 'Chennai'};
+
+    after(done => {
+      Contact.destroy({where: {firstName: contact.firstName}})
+      .then(() => {
+        done();
+      })
+      .catch(err => {
+        done(err);
+      })
+    });
+
+    it('should not allow alphabets, symbols', done => {
+      Contact.create({firstName: 'Karthik', lastName: 'S', phoneNumber: 'abc!987877888', email: 'karthiks@example.com', address: 'Chennai'})
+      .then(() => {
+        done(new Error('Contact created with an invalid phone number'));
+      })
+      .catch(err => {
+        expect(err).to.be.an('error');
+        expect(err.message).to.include('Validation isNumeric on phoneNumber failed');
+        done();
+      });
+    });
+
+    it('should not allow less than 10 digits', done => {
+      Contact.create({firstName: 'Karthik', lastName: 'S', phoneNumber: '987877', email: 'karthiks@example.com', address: 'Chennai'})
+      .then(() => {
+        done(new Error('Contact created with an invalid phone number'));
+      })
+      .catch(err => {
+        expect(err).to.be.an('error');
+        expect(err.message).to.include('Validation len on phoneNumber failed');
+        done();
+      });
+    });
+
+    it('should not allow more than 10 digits', done => {
+      Contact.create({firstName: 'Karthik', lastName: 'S', phoneNumber: '909098989898', email: 'karthiks@example.com', address: 'Chennai'})
+      .then(() => {
+        done(new Error('Contact created with an invalid phone number'));
+      })
+      .catch(err => {
+        expect(err).to.be.an('error');
+        expect(err.message).to.include('Validation len on phoneNumber failed');
+        done();
+      });
+    });
+
+    it('should allow exactly 10 digits', done => {
+      Contact.create(contact)
+      .then((createdContact) => {
+        expect(createdContact).to.include(contact);
         done();
       })
       .catch(err => {
