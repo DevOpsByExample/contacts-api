@@ -17,7 +17,10 @@ describe('Contact model', () => {
 
   it('should not allow empty value for any fields', done => {
     Contact.create({firstName: '', lastName: '', phoneNumber: '', email: '', address: ''})
-    .catch(function(err) {
+    .then(contact => {
+      done(new Error('Contact created with one or more empty fields'));
+    })
+    .catch(err => {
       expect(err).to.be.an('error');
       expect(err.message).to.include('Validation notEmpty on firstName failed');
       expect(err.message).to.include('Validation notEmpty on lastName failed');
