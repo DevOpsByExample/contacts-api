@@ -1,8 +1,8 @@
-var Sequelize = require('sequelize');
-var sequelize = require('../util/sequelize');
-var logger = require('../util/logger');
+const Sequelize = require('sequelize');
+const sequelize = require('../util/sequelize');
+const logger = require('../util/logger');
 
-var Contact = sequelize.define('contact', {
+const Contact = sequelize.define('contact', {
   firstName: {
     type: Sequelize.STRING,
     allowNull: false,

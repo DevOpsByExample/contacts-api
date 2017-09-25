@@ -4,7 +4,7 @@ const Contact = require('../../models/contact');
 
 describe('Contact model', () => {
   it('should have all the necessary fields', done => {
-    let attributes = Contact.rawAttributes;
+    const attributes = Contact.rawAttributes;
 
     expect(attributes).to.have.property('id');
     expect(attributes).to.have.property('firstName');
@@ -32,7 +32,7 @@ describe('Contact model', () => {
   });
 
   describe('Email field', done => {
-    let contact = {firstName: 'Karthik', lastName: 'S', phoneNumber: '9090909898', email: 'karthiks@example.com', address: 'Chennai'};
+    const contact = {firstName: 'Karthik', lastName: 'S', phoneNumber: '9090909898', email: 'karthiks@example.com', address: 'Chennai'};
 
     after(done => {
       Contact.destroy({where: {firstName: contact.firstName}})
@@ -69,7 +69,7 @@ describe('Contact model', () => {
   });
 
   describe('Phone number field', done => {
-    let contact = {firstName: 'Karthik', lastName: 'S', phoneNumber: '9098987654', email: 'karthiks@example.com', address: 'Chennai'};
+    const contact = {firstName: 'Karthik', lastName: 'S', phoneNumber: '9098987654', email: 'karthiks@example.com', address: 'Chennai'};
 
     after(done => {
       Contact.destroy({where: {firstName: contact.firstName}})

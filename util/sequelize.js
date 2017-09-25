@@ -1,8 +1,8 @@
-var Sequelize = require('sequelize');
+const Sequelize = require('sequelize');
 const config = require(`../config/${process.env.NODE_ENV}.js`);
 const logger = require('./logger');
 
-var sequelize = new Sequelize(config.dbName, config.dbUsername, config.dbPassword, {
+const sequelize = new Sequelize(config.dbName, config.dbUsername, config.dbPassword, {
   host: config.dbHostname,
   dialect: 'postgres',
   logging: logger.log,

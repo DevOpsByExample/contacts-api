@@ -1,31 +1,31 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-var Contact = require('../models/contact');
+const Contact = require('../models/contact');
 
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
   Contact.all()
-    .then(function(contacts) {
+    .then(contacts => {
       res.json(contacts);
     })
-    .catch(function(err) {
+    .catch(err => {
       next(err, req, res);
     });
 });
 
-router.get('/:id', function(req, res, next) {
+router.get('/:id', (req, res, next) => {
   Contact.findOne({where: {id: req.params.id}})
-    .then(function(contact) {
+    .then(contact => {
       contact || res.status(404).json({message: 'Contact not found'});
       res.json(contact);
     })
-    .catch(function(err) {
+    .catch(err => {
       next(err, req, res);
     });
 });
 
-router.put('/', function(req, res, next) {
-  var data = {
+router.put('/', (req, res, next) => {
+  const data = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     phoneNumber: req.body.phoneNumber,
@@ -34,16 +34,16 @@ router.put('/', function(req, res, next) {
   };
 
   Contact.create(data)
-    .then(function(contact) {
+    .then(contact => {
       res.json(contact);
     })
-    .catch(function(err) {
+    .catch(err => {
       next(err, req, res);
     });
 });
 
-router.post('/:id', function(req, res, next) {
-  var data = {
+router.post('/:id', (req, res, next) => {
+  const data = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     phoneNumber: req.body.phoneNumber,
@@ -52,35 +52,35 @@ router.post('/:id', function(req, res, next) {
   };
 
   Contact.findOne({where: {id: req.params.id}})
-    .then(function(contact) {
+    .then(contact => {
       contact || res.status(404).json({message: 'Contact not found'});
 
-      var fieldsToUpdate = Object.keys(data).filter(function(field) {
+      const fieldsToUpdate = Object.keys(data).filter(field => {
         return data[field] !== contact[field];
       });
 
       contact.update(data, {fields: fieldsToUpdate})
-        .then(function(updatedData) {
+        .then(updatedData => {
           res.json(updatedData);
         })
-        .catch(function(err) {
+        .catch(err => {
           next(err, req, res);
         });
     })
-    .catch(function(err) {
+    .catch(err => {
       next(err, req, res);
     });
 });
 
-router.delete('/:id', function(req, res, next) {
-  var id = req.params.id;
+router.delete('/:id', (req, res, next) => {
+  const id = req.params.id;
 
   Contact.destroy({where: {id: id}})
-    .then(function(affectedRows) {
+    .then(affectedRows => {
       affectedRows === 0 && res.status(404).json({message: 'Contact not found'});
       res.json({message: 'Deleted successfully'});
     })
-    .catch(function(err) {
+    .catch(err => {
       next(err, req, res);
     });
 });

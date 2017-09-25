@@ -7,7 +7,7 @@ const contacts = [
 	{"firstName": "Arun", "lastName": "S", "phoneNumber": "9876767676", "email": "arun@gmail.com", "address": "Taramani, Chennai"},
 	{"firstName": "Krishna", "lastName": "S", "phoneNumber": "9876767123", "email": "krihna@gmail.com", "address": "Chennai"}
 ];
-var contactIds = [];
+let contactIds = [];
 
 before(done => {
   Contact.bulkCreate(contacts)
@@ -134,7 +134,7 @@ describe('POST /contacts/:id', () => {
 		.expect('Content-Type', /json/)
 		.expect(200)
 		.then(response => {
-			var updatedContact = response.body;
+			const updatedContact = response.body;
 
 			expect(updatedContact.firstName).to.equal('Arunvel');
 			expect(updatedContact.phoneNumber).to.equal('0000000000');

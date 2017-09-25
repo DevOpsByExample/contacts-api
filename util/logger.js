@@ -1,10 +1,10 @@
-var fs = require('fs');
-var path = require('path');
+const fs = require('fs');
+const path = require('path');
 
 const env = process.env.NODE_ENV;
 
 const writeToFile = (content, filePath = path.join(__dirname, '../app.log')) => {
-	var logFileStream = fs.createWriteStream(filePath, {flags: 'a'});
+	const logFileStream = fs.createWriteStream(filePath, {flags: 'a'});
 	logFileStream.write(`${content}\n`);
 	logFileStream.end();
 }

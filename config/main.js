@@ -1,5 +1,5 @@
 const env = process.env.NODE_ENV || 'development';
-var config = require(`./${env}.js`);
+let config = require(`./${env}.js`);
 
 config.dbHostname = process.env.DB_HOSTNAME || 'localhost';
 config.dbPort = process.env.DB_PORT || 5432;
