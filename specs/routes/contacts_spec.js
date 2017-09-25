@@ -10,21 +10,16 @@ const contacts = [
 var contactIds = [];
 
 before(done => {
-	Contact.destroy({truncate: true})
-	.then(() => {
-			Contact.bulkCreate(contacts)
-			.then(() => {
-				return Contact.findAll();
-			}).then(createdContacts => {
-				contactIds = createdContacts.map(contact => contact.id);
-				done();
-			})
-			.catch(err => {
-				done(err);
-			});
-	}).catch(err => {
-		done(err);
-	});
+  Contact.bulkCreate(contacts)
+  .then(() => {
+    return Contact.findAll();
+  }).then(createdContacts => {
+    contactIds = createdContacts.map(contact => contact.id);
+    done();
+  })
+  .catch(err => {
+    done(err);
+  });
 });
 
 describe('GET /contacts', () => {

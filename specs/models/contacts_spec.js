@@ -30,4 +30,41 @@ describe('Contact model', () => {
       done();
     });
   });
+
+  describe('Email field', done => {
+    let contact = {firstName: 'Karthik', lastName: 'S', phoneNumber: '98987877888', email: 'karthiks@example.com', address: 'Chennai'};
+
+    after(done => {
+      Contact.destroy({where: {firstName: contact.firstName}})
+      .then(() => {
+        done();
+      })
+      .catch(err => {
+        done(err);
+      })
+    });
+
+    it('should not allow invalid email addresses', done => {
+      Contact.create({firstName: 'Arun', lastName: 'S', phoneNumber: '98987877888', email: 'aruns', address: 'Chennai'})
+      .then(contact => {
+        done(new Error('Contact created with an invalid email address'));
+      })
+      .catch(err => {
+        expect(err).to.be.an('error');
+        expect(err.message).to.include('Validation isEmail on email failed');
+        done();
+      });
+    });
+
+    it('should allow valid email addresses', done => {
+      Contact.create(contact)
+      .then(createdContact => {
+        expect(createdContact).to.include(createdContact);
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+    });
+  });
 });
