@@ -15,6 +15,7 @@ sequelize.authenticate()
   logger.error('Failed to establish connection with DB', err);
 });
 
+const index = require('./routes/index');
 const contacts = require('./routes/contacts');
 
 const app = express();
@@ -27,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
 
+app.use('/', index);
 app.use('/contacts', contacts);
 
 // catch 404 and forward to error handler
