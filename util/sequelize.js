@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const config = require(`../config/${process.env.NODE_ENV}.js`);
+const config = require(`../config/main.js`);
 const logger = require('./logger');
 
 const sequelize = new Sequelize(config.dbName, config.dbUsername, config.dbPassword, {
