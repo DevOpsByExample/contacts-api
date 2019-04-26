@@ -77,14 +77,14 @@ describe('GET /contacts/:id', () => {
 	});
 });
 
-describe('PUT /contacts', () => {
+describe('POST /contacts', () => {
 	it('should create a contact', done => {
 		const contact = {
 			"firstName": "Viky", "lastName": "C", "phoneNumber": "9876767676", "email": "viky@gmail.com", "address": "Chennai"
 		};
 
 		supertestAgent
-		.put('/contacts')
+		.post('/contacts')
 		.send(contact)
 		.expect('Content-Type', /json/)
 		.expect(200)
@@ -105,7 +105,7 @@ describe('PUT /contacts', () => {
 		};
 
 		supertestAgent
-		.put('/contacts')
+		.post('/contacts')
 		.send(contact)
 		.expect('Content-Type', /json/)
 		.expect(500)
@@ -121,7 +121,7 @@ describe('PUT /contacts', () => {
 	});
 });
 
-describe('POST /contacts/:id', () => {
+describe('PUT /contacts/:id', () => {
 	it('should update a contact by id', done => {
 		const id = contactIds[0];
 		const contact = {
@@ -129,7 +129,7 @@ describe('POST /contacts/:id', () => {
 		};
 
 		supertestAgent
-		.post(`/contacts/${id}`)
+		.put(`/contacts/${id}`)
 		.send(contact)
 		.expect('Content-Type', /json/)
 		.expect(200)
@@ -147,7 +147,7 @@ describe('POST /contacts/:id', () => {
 
 	it('should return 404 when contact is not present', done => {
 		supertestAgent
-		.post('/contacts/10')
+		.put('/contacts/10')
 		.send({})
 		.expect('Content-Type', /json/)
 		.expect(404)
