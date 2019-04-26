@@ -24,7 +24,7 @@ router.get('/:id', (req, res, next) => {
     });
 });
 
-router.put('/', (req, res, next) => {
+router.post('/', (req, res, next) => {
   const data = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -42,7 +42,7 @@ router.put('/', (req, res, next) => {
     });
 });
 
-router.post('/:id', (req, res, next) => {
+router.put('/:id', (req, res, next) => {
   const data = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
