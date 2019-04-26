@@ -4,7 +4,7 @@ const router = express.Router();
 const Contact = require('../models/contact');
 
 router.get('/', (req, res, next) => {
-  Contact.all()
+  Contact.findAll()
     .then(contacts => {
       res.json(contacts);
     })
