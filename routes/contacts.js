@@ -16,7 +16,10 @@ router.get('/', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   Contact.findOne({where: {id: req.params.id}})
     .then(contact => {
-      contact || res.status(404).json({message: 'Contact not found'});
+      if (!contact) {
+        res.status(404).json({message: 'Contact not found'});
+        return;
+      }
       res.json(contact);
     })
     .catch(err => {
@@ -53,7 +56,10 @@ router.put('/:id', (req, res, next) => {
 
   Contact.findOne({where: {id: req.params.id}})
     .then(contact => {
-      contact || res.status(404).json({message: 'Contact not found'});
+      if (!contact) {
+        res.status(404).json({message: 'Contact not found'});
+        return;
+      }
 
       const fieldsToUpdate = Object.keys(data).filter(field => {
         return data[field] !== contact[field];
@@ -77,7 +83,10 @@ router.delete('/:id', (req, res, next) => {
 
   Contact.destroy({where: {id: id}})
     .then(affectedRows => {
-      affectedRows === 0 && res.status(404).json({message: 'Contact not found'});
+      if (affectedRows === 0) {
+        res.status(404).json({message: 'Contact not found'});
+        return;
+      }
       res.json({message: 'Deleted successfully'});
     })
     .catch(err => {
