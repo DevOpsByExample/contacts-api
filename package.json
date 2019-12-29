@@ -6,7 +6,7 @@
     "initdb": "sequelize db:create",
     "start": "sequelize db:migrate && node ./bin/www",
     "nodemon": "sequelize db:migrate && nodemon ./bin/www",
-    "test": "NODE_ENV=test sequelize db:migrate && mocha --timeout 10000 --recursive specs/"
+    "test": "NODE_ENV=test sequelize db:migrate && NODE_ENV=test mocha --timeout 10000 --recursive specs/"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
