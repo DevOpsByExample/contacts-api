@@ -1,5 +1,5 @@
 module.exports = {
   dbName: 'contacts_development',
-  dbUsername: 'dev',
-  dbPassword: 'dev'
+  dbUsername: process.env.DB_USERNAME || 'dev',
+  dbPassword: process.env.DB_PASSWORD || 'dev'
 };
