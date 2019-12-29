@@ -13,6 +13,15 @@ before(done => {
   });
 });
 
+after(done => {
+  Contact.destroy({truncate: true})
+    .then(() => {
+      done();
+    }).catch(err => {
+    done(err);
+  });
+});
+
 module.exports = {
 	supertestAgent: supertest.agent(app)
 };
