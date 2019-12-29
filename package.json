@@ -6,7 +6,8 @@
     "initdb": "sequelize db:create",
     "start": "sequelize db:migrate && node ./bin/www",
     "nodemon": "sequelize db:migrate && nodemon ./bin/www",
-    "test": "NODE_ENV=test sequelize db:migrate && NODE_ENV=test mocha --timeout 10000 --recursive specs/"
+    "test": "NODE_ENV=test sequelize db:migrate && NODE_ENV=test mocha --timeout 10000 --recursive specs/",
+    "coverage": "NODE_ENV=test sequelize db:migrate && NODE_ENV=test nyc mocha --timeout 10000 --recursive specs/"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -24,6 +25,7 @@
     "chai": "^4.2.0",
     "mocha": "^6.2.0",
     "nodemon": "^1.19.1",
+    "nyc": "^15.0.0",
     "supertest": "^4.0.2"
   }
 }

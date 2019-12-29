@@ -31,3 +31,6 @@ npm-debug.log
 
 # Environment variables
 .envrc
+
+# nyc files
+.nyc_output/
