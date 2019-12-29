@@ -5,6 +5,7 @@
  */
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+process.env.PORT = process.env.PORT || 3000;
 
 const app = require('../app');
 const debug = require('debug')('address-book-api:server');
@@ -14,8 +15,7 @@ const http = require('http');
  * Get port from config and store in Express.
  */
 
-const config = require('../config/main');
-const port = normalizePort(config.appPort);
+const port = normalizePort(process.env.PORT);
 app.set('port', port);
 
 /**

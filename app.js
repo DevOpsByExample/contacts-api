@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const sequelize = require('./util/sequelize');
+const {sequelize} = require('./db_models');
 const logger = require('./util/logger');
 
 sequelize.authenticate()

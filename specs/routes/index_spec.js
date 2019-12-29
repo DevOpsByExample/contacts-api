@@ -1,6 +1,5 @@
 const expect = require('chai').expect;
 const specHelper = require('../spec_helper');
-const Contact = require('../../models/contact');
 
 const supertestAgent = specHelper.supertestAgent;
 
