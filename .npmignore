@@ -1,0 +1,13 @@
+README.md
+
+# Test files
+specs/
+
+# Docker files
+.dockerignore
+Dockerfile
+
+# Configs and other supportive files
+config/test.js
+config/development.js
+support/
