@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "nodemon": "nodemon ./bin/www",
-    "test": "mocha --timeout 10000 --recursive specs/"
+    "initdb": "sequelize db:create",
+    "start": "sequelize db:migrate && node ./bin/www",
+    "nodemon": "sequelize db:migrate && nodemon ./bin/www",
+    "test": "NODE_ENV=test sequelize db:migrate && mocha --timeout 10000 --recursive specs/"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -16,7 +17,8 @@
     "morgan": "^1.9.1",
     "pg": "^7.12.1",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^5.15.1"
+    "sequelize": "^5.15.1",
+    "sequelize-cli": "^5.5.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",

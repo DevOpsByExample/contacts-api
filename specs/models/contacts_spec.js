@@ -1,5 +1,4 @@
 const expect = require('chai').expect;
-const specHelper = require('../spec_helper');
 const Contact = require('../../models/contact');
 
 describe('Contact model', () => {

@@ -7,7 +7,7 @@ const writeToFile = (content, filePath = path.join(__dirname, '../app.log')) => 
 	const logFileStream = fs.createWriteStream(filePath, {flags: 'a'});
 	logFileStream.write(`${content}\n`);
 	logFileStream.end();
-}
+};
 
 const logger = {
 	log: (message) => {
