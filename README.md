@@ -1,5 +1,5 @@
 # contacts-api
-> simple API service for learning
+> a simple application that exposes REST APIs for learning
 
 `contacts-api` exposes REST endpoints to get, create, update, delete and list contacts.
 UI for the app is available [here](https://github.com/DevOpsByExample/contacts-ui)
@@ -15,7 +15,7 @@ If necessary, configure using env variables
 |--|--|
 | NODE_ENV | "development" |
 | PORT | 3000 |
-|
+
 
 ### Database Configuration - `development`
 
@@ -26,7 +26,7 @@ If necessary, configure using env variables
 | DB_NAME | "contacts_development" |
 | DB_HOSTNAME | "localhost" |
 | DB_PORT | 5432 |
-|
+
 
 ### Database Configuration - `test`
 
@@ -37,7 +37,7 @@ If necessary, configure using env variables
 | DB_NAME |  "contacts_test" |
 | DB_HOSTNAME | "localhost" |
 | DB_PORT | 5432 |
-|
+
 
 ### Database Configuration - `production`
 
@@ -48,7 +48,7 @@ If necessary, configure using env variables
 | DB_NAME | "contacts_production" |
 | DB_HOSTNAME | "localhost" |
 | DB_PORT | 5432 |
-|
+
 
 ## Up and Running
 
