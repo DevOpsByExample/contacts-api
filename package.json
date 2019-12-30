@@ -3,11 +3,17 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "initdb": "sequelize db:create",
-    "start": "sequelize db:migrate && node ./bin/www",
-    "nodemon": "sequelize db:migrate && nodemon ./bin/www",
-    "test": "NODE_ENV=test sequelize db:migrate && NODE_ENV=test mocha --timeout 10000 --recursive specs/",
-    "coverage": "NODE_ENV=test sequelize db:migrate && NODE_ENV=test nyc mocha --timeout 10000 --recursive specs/"
+    "createdb": "sequelize db:create",
+    "dropdb": "sequelize db:drop",
+    "migrate": "sequelize db:migrate",
+    "start": "npm run migrate && node ./bin/www",
+    "nodemon": "npm run migrate && nodemon ./bin/www",
+    "pretest": "NODE_ENV=test npm run createdb && NODE_ENV=test npm run migrate",
+    "posttest": "NODE_ENV=test npm run dropdb",
+    "test": "NODE_ENV=test mocha --timeout 10000 --recursive specs/",
+    "precoverage": "npm run pretest",
+    "postcoverage": "npm run posttest",
+    "coverage": "NODE_ENV=test nyc mocha --timeout 10000 --recursive specs/"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
