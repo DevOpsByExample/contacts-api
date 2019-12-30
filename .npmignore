@@ -7,7 +7,6 @@ specs/
 .dockerignore
 Dockerfile
 
-# Configs and other supportive files
+# Config files
 config/test.js
 config/development.js
-support/
